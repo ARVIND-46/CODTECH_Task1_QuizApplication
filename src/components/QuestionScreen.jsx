@@ -1,59 +1,97 @@
-import React, { useState } from 'react';
-import { quizData } from './QuestionBank';
-import NavigationBottom from './NavigationBottom';
-import '../style/styles.css'
+import React, { useState, useEffect, useRef } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import {
+  gkQuizData,
+  CricketQuizData,
+  ScienceQuizData,
+  HistoryQuizData
+} from './QuestionBank';
+import '../style/styles.css';
 
 const QuestionScreen = () => {
-  const [currentQuestion, setCurrentQuestion] = useState(0); // index of current question
-  const [score, setScore] = useState(0);
-  const [showScore, setShowScore] = useState(false);
+  const { category } = useParams();
+  const navigate = useNavigate();
 
-  const handleAnswer = (selectedOption) => {
-    const isCorrect = selectedOption === quizData[currentQuestion].correct;
+  // Persistent audio refs
+  const correctSoundRef = useRef(null);
+  const wrongSoundRef = useRef(null);
 
-    if (isCorrect) {
-      setScore(score + 1);
-    }
+  useEffect(() => {
+    correctSoundRef.current = new Audio('/Sounds/correct-answer.mp3');
+    correctSoundRef.current.volume = 0.5;
+    correctSoundRef.current.preload = 'auto';
 
-    const nextQuestion = currentQuestion + 1;
+    wrongSoundRef.current = new Audio('/Sounds/wrong-answer.mp3');
+    wrongSoundRef.current.volume = 1;
+    wrongSoundRef.current.preload = 'auto';
+  }, []);
 
-    if (nextQuestion < quizData.length) {
-      setCurrentQuestion(nextQuestion);
-    } else {
-      setShowScore(true); // show result after last question
+  // Select questions based on category
+  const getQuizData = () => {
+    switch (category?.toLowerCase()) {
+      case 'gk':
+        return gkQuizData;
+      case 'cricket':
+        return CricketQuizData;
+      case 'science':
+        return ScienceQuizData;
+      case 'history':
+        return HistoryQuizData;
+      default:
+        return [];
     }
   };
 
-  return (
-    <div className="question-screen">
-      <h1>Quiz App</h1>
+  const [questions] = useState(getQuizData());
+  const [currentQ, setCurrentQ] = useState(0);
+  const [score, setScore] = useState(0);
 
-      {showScore ? (
-        <div>
-          <h2>Your Score: {score} / {quizData.length}</h2>
-        </div>
-      ) : (
-        <div className="question-item">
-          <h2>{quizData[currentQuestion].question}</h2>
-          <ul>
-            {quizData[currentQuestion].options.map((option, index) => (
-              <li key={index}>
-                <button onClick={() => handleAnswer(option)}>{option}</button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-      <NavigationBottom 
-            current={currentQuestion}
-            total={quizData.length}
-            onPrev={() => setCurrentQuestion(currentQuestion - 1)}
-            onNext={() => setCurrentQuestion(currentQuestion + 1)}
-        />
+  const handleAnswer = (selected) => {
+    const isCorrect = selected === questions[currentQ].correct;
+
+    // Play sound using ref
+    if (isCorrect) {
+      correctSoundRef.current?.play();
+    } 
+    else {
+      wrongSoundRef.current?.play();
+    }
+
+    // Update score
+    if (isCorrect) setScore((prev) => prev + 1);
+
+    // Move to next question
+    const nextQ = currentQ + 1;
+    setTimeout(() => {
+      if (nextQ < questions.length) {
+        setCurrentQ(nextQ);
+      } else {
+        navigate('/result', {
+          state: { score: isCorrect ? score + 1 : score, total: questions.length, category }
+        });
+      }
+    }, 800);
+  };
+
+  return (
+    <div className="quiz-container">
+      <h2>{category?.toUpperCase()} Quiz</h2>
+      <h3>Question {currentQ + 1} / {questions.length}</h3>
+
+      <div className="question-box">
+        <p className="question">{questions[currentQ].question}</p>
+        <ul className="options-list">
+          {questions[currentQ].options.map((option, index) => (
+            <li key={index}>
+              <button className="option-btn" onClick={() => handleAnswer(option)}>
+                {option}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
-    
   );
 };
-
 
 export default QuestionScreen;
