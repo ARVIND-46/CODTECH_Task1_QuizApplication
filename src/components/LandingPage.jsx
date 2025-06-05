@@ -6,7 +6,7 @@ const LandingPage = () => {
   const navigate = useNavigate();
 
   const handleStart = (path) => {
-    alert('Lets start the game!');
+    alert('Lets start the game you have 60sec!');
     navigate(path);
   };
 
