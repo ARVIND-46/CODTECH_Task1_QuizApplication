@@ -17,7 +17,7 @@ const LandingPage = () => {
       <p className="landing-desc">Choose a quiz category to get started:</p>
 
       <div className="quiz-buttons">
-        <button onClick={() => handleStart('/quiz/gk')}>General Knowledge</button>
+        <button onClick={() => handleStart('/quiz/gk')}>GK</button>
         <button onClick={() => handleStart('/quiz/cricket')}>Cricket</button>
         <button onClick={() => handleStart('/quiz/Science')}>Science</button>
         <button onClick={() => handleStart('/quiz/History')}>History</button>
