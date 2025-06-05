@@ -93,6 +93,62 @@ body {
   color: #dddddd;
 }
 
+/* Question Page */
+.quiz-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: linear-gradient(to bottom left, #1e3c72, #2a5298);
+  color: #fff;
+  text-align: center;
+}
+
+/* Headings */
+.quiz-container h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.quiz-container h3 {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+  color: #dddddd;
+}
+
+/* Timer Styles */
+.timer {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.timer h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+/* Progress bar container */
+.progress-container {
+  width: 90%;
+  height: 12px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 0 auto 20px auto;
+}
+
+/* Progress bar itself */
+.progress-bar {
+  height: 100%;
+  background-color: #1dd936;
+  transition: width 1s linear;
+}
+
 /* Question Box */
 .question-box {
   background-color: rgba(255, 255, 255, 0.1);
@@ -103,14 +159,14 @@ body {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
 }
 
-/* Question Text */
+/* Question */
 .question {
   font-size: 1.4rem;
   font-weight: 600;
   margin-bottom: 25px;
 }
 
-/* Options List */
+/* Options Grid */
 .options-list {
   list-style: none;
   padding: 0;
@@ -133,10 +189,29 @@ body {
   width: 100%;
 }
 
-.option-btn:hover {
+.option-btn:hover:not(:disabled) {
   background-color: #fb8c00;
   transform: scale(1.03);
 }
+
+/* Disabled button */
+.option-btn:disabled {
+  opacity: 0.9;
+  cursor: not-allowed;
+}
+
+/* Correct answer styling */
+.option-btn.correct {
+  background-color: #4caf50 !important;
+  color: #fff;
+}
+
+/* Wrong answer styling */
+.option-btn.wrong {
+  background-color: #f44336 !important;
+  color: #fff;
+}
+
 /* Result --Section */
 /* Result Screen Styles */
 .result-container {
@@ -240,7 +315,7 @@ body {
 .result-container {
   min-height: 100vh;
   padding: 50px 20px;
-  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  background: linear-gradient(to bottom left, #1e3c72, #2a5298);
   color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -290,4 +365,3 @@ body {
 }
 
 }
-

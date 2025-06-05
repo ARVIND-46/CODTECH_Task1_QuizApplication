@@ -21,6 +21,14 @@ const LandingPage = () => {
         <button onClick={() => handleStart('/quiz/cricket')}>Cricket</button>
         <button onClick={() => handleStart('/quiz/Science')}>Science</button>
         <button onClick={() => handleStart('/quiz/History')}>History</button>
+        <button onClick={() => handleStart('/quiz/Maths')}>Maths</button>
+        <button onClick={() => handleStart('/quiz/Computer')}>Computer</button>
+        <button onClick={() => handleStart('/quiz/Geography')}>Geography</button>
+        <button onClick={() => handleStart('/quiz/India')}>India</button>
+        <button onClick={() => handleStart('/quiz/Sport')}>Sport</button>
+        <button onClick={() => handleStart('/quiz/Tech')}>Tech</button>
+        <button onClick={() => handleStart('/quiz/Marvel')}>Marvel</button>
+        
       </div>
     </div>
   );
