@@ -9,6 +9,26 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f0f4f8;
 }
+/* Navbar --Section */
+.navbar {
+  background: linear-gradient(to right, #1e3c72, #2a5298);
+  padding: 15px 30px;
+  color: #fff;
+  display: flex;
+  align-items: left;
+  justify-content: left;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.navbar-brand {
+  font-size: 1.8rem;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 
 /* Main Container */
 .landing-container {
@@ -265,6 +285,21 @@ body {
 .home-btn:hover {
   background-color: #f4511e;
 }
+/* fooeter --Section */
+.footer {
+  background: linear-gradient(to right, #1e3c72, #2a5298);
+  color: white;
+  padding: 20px 30px;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
@@ -363,5 +398,16 @@ body {
 .home-btn:hover {
   background-color: #f4511e;
 }
+/* Footer */
+ .footer-content {
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  .footer {
+    text-align: left;
+  }
 
 }
